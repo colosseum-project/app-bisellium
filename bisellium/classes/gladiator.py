@@ -1,6 +1,5 @@
 import os
-import pagan
-from bisellium.classes.print_blocker import PrintBlocker
+from ..lib.pagan import pagan
 from flask import current_app
 from flask.helpers import safe_join
 
@@ -18,8 +17,7 @@ class Gladiator:
 
     def __generate_pagan(self) -> None:
         img = pagan.Avatar(self.name, pagan.SHA512)
-        with PrintBlocker():
-            img.save(self.__get_pagan_folder_os_path(), self.pagan_filename)
+        img.save(self.__get_pagan_folder_os_path(), self.pagan_filename)
 
     def __get_pagan_folder_os_path(self):
         return safe_join(current_app.static_folder, PAGAN_FOLDER_STATIC_PATH)

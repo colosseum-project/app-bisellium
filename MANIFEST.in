@@ -1,5 +1,8 @@
 include LICENSE
+include README.md
 graft bisellium/static
 prune bisellium/static/img/pagan
 graft bisellium/templates
-global-exclude *.pyc __pycache__
+graft bisellium/lib/pagan/pgn
+global-exclude *.pyc
+global-exclude __pycache__

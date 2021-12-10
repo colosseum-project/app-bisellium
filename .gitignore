@@ -13,4 +13,4 @@ build/
 .idea/
 *.swp
 *~
-pagan/
+**/static/img/pagan
