@@ -13,5 +13,4 @@
     "--max-line-length=88"
   ],
   "trailing-spaces.trimOnSave": true,
-  "python.pythonPath": "C:\\Python310\\python.exe",
 }
