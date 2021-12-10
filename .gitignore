@@ -14,3 +14,4 @@ build/
 *.swp
 *~
 **/static/img/pagan
+prometheus_metrics
