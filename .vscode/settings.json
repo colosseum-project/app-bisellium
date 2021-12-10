@@ -1,0 +1,17 @@
+{
+  // See https://code.visualstudio.com/docs/getstarted/settings
+  // for the documentation about the settings.json format
+  "[python]": {
+    "editor.formatOnSave": true
+  },
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    // Match what black does
+    "--max-line-length=88"
+  ],
+  "trailing-spaces.trimOnSave": true,
+  "python.pythonPath": "C:\\Python310\\python.exe",
+}

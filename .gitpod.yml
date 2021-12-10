@@ -1,0 +1,21 @@
+ports:
+  - port: 5000
+    onOpen: open-preview
+
+tasks:
+  - before: |
+      export FLASK_APP=bisellium
+      export FLASK_ENV=development
+      export PROMETHEUS_MULTIPROC_DIR=/tmp/prom_metrics
+    init: |
+      pip3 install -r requirements-dev.txt
+      pip3 install -e .
+    command: |
+      flask run
+
+vscode:
+  extensions:
+    - ms-python.python
+    - DavidAnson.vscode-markdownlint
+    - Gruntfuggly.todo-tree
+    - shardulm94.trailing-spaces

@@ -1,0 +1,3 @@
+Flask==2.0.2
+prometheus-flask-exporter==0.18.1
+pagan==0.4.3

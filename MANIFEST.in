@@ -1,0 +1,5 @@
+include LICENSE
+graft bisellium/static
+prune bisellium/static/img/pagan
+graft bisellium/templates
+global-exclude *.pyc __pycache__
