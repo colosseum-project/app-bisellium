@@ -6,7 +6,7 @@ tasks:
   - before: |
       export FLASK_APP=bisellium
       export FLASK_ENV=development
-      export PROMETHEUS_MULTIPROC_DIR=/tmp/prom_metrics
+      export PROMETHEUS_MULTIPROC_DIR=./prometheus_metrics
     init: |
       pip3 install -r requirements-dev.txt
       pip3 install -e .
