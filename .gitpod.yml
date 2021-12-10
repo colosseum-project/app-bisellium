@@ -19,3 +19,4 @@ vscode:
     - DavidAnson.vscode-markdownlint
     - Gruntfuggly.todo-tree
     - shardulm94.trailing-spaces
+    - eamodio.gitlens
