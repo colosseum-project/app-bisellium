@@ -2,7 +2,10 @@
   // See https://code.visualstudio.com/docs/getstarted/settings
   // for the documentation about the settings.json format
   "[python]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
   },
   "python.formatting.provider": "black",
   "python.linting.enabled": true,
