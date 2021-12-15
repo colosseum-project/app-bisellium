@@ -4,7 +4,7 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
 
 ## Contributing Code
 
-1. Clone the repository to your local disk:
+1. Clone the repository to your local disk
 
    ```sh
    git clone https://github.com/colosseum-project/app-bisellium.git
