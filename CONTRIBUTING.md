@@ -30,7 +30,7 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
    ```sh
    export FLASK_APP=bisellium
    export FLASK_ENV=development
-   export PROMETHEUS_MULTIPROC_DIR=./prom_metrics
+   export PROMETHEUS_MULTIPROC_DIR=./prometheus_metrics
    export DEBUG_METRICS=1 # only for debugging Prometheus metrics (WARNING: high disk usage)
    ```
 
