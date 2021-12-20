@@ -14,7 +14,6 @@ See [LICENSE](LICENSE) for more information or see <https://opensource.org/licen
 - [Contributing](#contributing)
 - [Build OCI image](#build-oci-image)
 
-
 ## Contributing
 
 If you want to contribute to the project, please read the [CONTRIBUTING file](CONTRIBUTING.md).

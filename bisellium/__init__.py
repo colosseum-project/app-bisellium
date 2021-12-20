@@ -1,36 +1,37 @@
-import os
 from flask import Flask
-from prometheus_flask_exporter import PrometheusMetrics
 
-metrics = PrometheusMetrics.for_app_factory()
+from bisellium.extensions import metrics, init_metrics_dir
+from bisellium.error_handlers import internal_server_error_handler
+from bisellium.public import home, gladiatores, misc
 
 
 def create_app():
-    """Create and configure an instance of the Flask application."""
+    """Create Flask application."""
     app = Flask(__name__)
 
-    # ensure the instance directory exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
+    app.config.from_pyfile("config.py")
+    app.logger.info(f'Ludus URL set to "{app.config["LUDUS_URL"]}"')
 
-    # ensure the Prometheus directory exists
-    try:
-        os.makedirs(os.environ.get("PROMETHEUS_MULTIPROC_DIR"))
-    except OSError:
-        pass
-
-    # initialize Prometheus metrics
-    metrics.init_app(app)
-
-    with app.app_context():
-        from bisellium import home
-        from bisellium import gladiatores
-        from bisellium import misc
-
-        app.register_blueprint(home.bp)
-        app.register_blueprint(gladiatores.bp)
-        app.register_blueprint(misc.bp)
+    init_extensions(app)
+    register_error_handlers(app)
+    register_blueprints(app)
 
     return app
+
+
+def init_extensions(app):
+    """Register extensions."""
+    init_metrics_dir()
+    metrics.init_app(app)
+
+
+def register_error_handlers(app):
+    """Register error handlers."""
+    app.register_error_handler(500, internal_server_error_handler)
+
+
+def register_blueprints(app):
+    """Register Flask blueprints."""
+    app.register_blueprint(home.bp)
+    app.register_blueprint(gladiatores.bp)
+    app.register_blueprint(misc.bp)

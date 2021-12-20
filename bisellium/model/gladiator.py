@@ -1,7 +1,9 @@
 import os
-from ..lib.pagan import pagan
+
 from flask import current_app
 from flask.helpers import safe_join
+
+from bisellium.lib.pagan import pagan
 
 PAGAN_FOLDER_STATIC_PATH = "img/pagan"
 
