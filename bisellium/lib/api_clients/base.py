@@ -1,13 +1,10 @@
 import requests
 
 from functools import wraps
+
 from urllib.parse import urljoin
 
-
-class APIException(Exception):
-    """Exception raised when an API call fails."""
-
-    pass
+from bisellium.lib.api_clients.exceptions import APIException
 
 
 def requests_call(func):
@@ -41,7 +38,7 @@ class BaseAPI:
 
     @requests_call
     def get(self, path, **kwargs):
-        return requests.get(self.__join_url(path), **kwargs).json()
+        return requests.get(self.__join_url(path), **kwargs)
 
     @requests_call
     def post(self, path, **kwargs):

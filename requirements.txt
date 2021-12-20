@@ -2,3 +2,4 @@ Flask==2.0.2
 requests==2.26.0
 prometheus-flask-exporter==0.18.1
 Pillow==8.4.0
+environs==9.3.5

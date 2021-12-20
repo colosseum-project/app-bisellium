@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+  Gladiatores
+{% endblock %}
+
+{% block content %}
+  <div class="alert alert-warning" role="alert">
+    Work in progress
+  </div>
+  <img class="img-fluid rounded-start" src="{{ url_for('static', filename=gladiator.get_pagan_static_path()) }}" alt="{{ gladiator.name }}">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>ID</td>
+        <td>{{ gladiator.id }}</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{ gladiator.name }}</td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>{{ gladiator.type }}</td>
+      </tr>
+      <tr>
+        <td>Ability</td>
+        <td>{{ gladiator.ability }}</td>
+      </tr>
+      <tr>
+        <td>Weapon</td>
+        <td>{{ gladiator.weapon }}</td>
+      </tr>
+      <tr>
+        <td>Armour</td>
+        <td>
+          <ul>
+            {% for piece in gladiator.armour %}
+            <li>{{ piece }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

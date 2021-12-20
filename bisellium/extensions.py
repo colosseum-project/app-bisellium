@@ -2,13 +2,21 @@ from os import makedirs
 
 from prometheus_flask_exporter import PrometheusMetrics
 
-from bisellium.config import PROMETHEUS_MULTIPROC_DIR
 
 metrics = PrometheusMetrics.for_app_factory()
 
 
-def init_metrics_dir():
+def create_metrics_dir():
+    """Create directory to store cached Prometheus metrics."""
+    from bisellium.settings import PROMETHEUS_MULTIPROC_DIR
+
     try:
         makedirs(PROMETHEUS_MULTIPROC_DIR)
     except FileExistsError:
         pass
+
+
+def init_extensions(app):
+    """Initialize extensions."""
+    create_metrics_dir()
+    metrics.init_app(app)
