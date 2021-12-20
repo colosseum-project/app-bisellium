@@ -35,6 +35,4 @@ class LudusAPI(BaseAPI):
     @call
     def get_one_gladiator(self, id):
         r = self.get(f"gladiators/{id}/full").json()
-        return Gladiator(
-            r["id"], r["name"], r["type"], r["ability"], r["weapon"], r["armour"]
-        )
+        return Gladiator(r["id"], r["name"], r["type"], r["ability"], r["equipment"])

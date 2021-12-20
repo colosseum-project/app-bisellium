@@ -28,14 +28,11 @@
         <td>{{ gladiator.ability }}</td>
       </tr>
       <tr>
-        <td>Weapon</td>
-        <td>{{ gladiator.weapon }}</td>
-      </tr>
-      <tr>
-        <td>Armour</td>
+        <td>Equipment</td>
         <td>
           <ul>
-            {% for piece in gladiator.armour %}
+            <li>{{ gladiator.equipment.weapon }}</li>
+            {% for piece in gladiator.equipment.armour %}
             <li>{{ piece }}</li>
             {% endfor %}
           </ul>

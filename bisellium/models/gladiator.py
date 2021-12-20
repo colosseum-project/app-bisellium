@@ -14,8 +14,7 @@ class Gladiator:
         "name",
         "type",
         "ability",
-        "weapon",
-        "armour",
+        "equipment",
         "__pagan_filename",
     )
 
@@ -25,15 +24,13 @@ class Gladiator:
         name: str,
         type: str,
         ability: object = None,
-        weapon: object = None,
-        armour: object = None,
+        equipment: object = None,
     ):
         self.id = id
         self.name = name.capitalize()
         self.type = type.capitalize()
         self.ability = ability
-        self.weapon = weapon
-        self.armour = armour
+        self.equipment = equipment
         self.__pagan_filename = f"{name.lower()}.png"
         if not os.path.exists(self.__get_pagan_os_path()):
             self.__generate_pagan()
