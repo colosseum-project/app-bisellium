@@ -1,43 +1,140 @@
 {% extends 'base.html' %}
 
 {% block title -%}
-  Gladiatores
+Gladiatores
 {% endblock %}
 
 {% block content %}
-  <div class="alert alert-warning" role="alert">
-    Work in progress
-  </div>
-  <img class="img-fluid rounded-start" src="{{ url_for('static', filename=gladiator.get_pagan_static_path()) }}" alt="{{ gladiator.name }}">
+
+<p>Gladiator #{{ gladiator.id }}</p>
+
+<div id="identity" class="text-center">
+  <img class="img-fluid rounded-start" src="{{ url_for('static', filename=gladiator.get_pagan_static_path()) }}"
+    alt="{{ gladiator.name }}">
+  <h1 class="text-dark">{{ gladiator.name }}</h1>
+  <h2 class="text-muted">{{ gladiator.type }}</h2>
+</div>
+
+<div id="ability">
+  <h3 class="text-center p-2 bg-dark text-white rounded rounded-3">Ability</h3>
+
+
   <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" width="100"></th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr>
-        <td>ID</td>
-        <td>{{ gladiator.id }}</td>
-      </tr>
-      <tr>
-        <td>Name</td>
-        <td>{{ gladiator.name }}</td>
-      </tr>
-      <tr>
-        <td>Type</td>
-        <td>{{ gladiator.type }}</td>
-      </tr>
-      <tr>
-        <td>Ability</td>
-        <td>{{ gladiator.ability }}</td>
-      </tr>
-      <tr>
-        <td>Equipment</td>
+      {% set ability = gladiator.ability %}
+      <tr class="align-middle">
         <td>
+          <img class="img-fluid me-2" src="{{ url_for('static', filename='img/ability/health.svg') }}" alt="health">
+        </td>
+        <td>
+          Health
+        </td>
+        <td>
+          {{ ability.health }} HP
+        </td>
+      </tr>
+      <tr class="align-middle">
+        <td>
+          <img class="img-fluid me-2" src="{{ url_for('static', filename='img/ability/attack.svg') }}" alt="attack">
+        </td>
+        <td>
+          Attack
+        </td>
+        <td>
+          Damage:
           <ul>
-            <li>{{ gladiator.equipment.weapon }}</li>
-            {% for piece in gladiator.equipment.armour %}
-            <li>{{ piece }}</li>
-            {% endfor %}
+            <li>{{ ability.damage['minimum'] }}-{{ ability.damage['maximum'] }} damage</li>
+            <li>{{ ability.damage['criticalPercentage'] }}% critical</li>
+          </ul>
+        </td>
+      </tr>
+      <tr class="align-middle">
+        <td>
+          <img class="img-fluid me-2" src="{{ url_for('static', filename='img/ability/defense.svg') }}" alt="defense">
+        </td>
+        <td>
+          Defense
+        </td>
+        <td>
+          Resistance:
+          <ul>
+            <li>Head: {{ ability.resistance['head'] }}</li>
+            <li>Upper body: {{ ability.resistance['upperBody'] }}</li>
+            <li>Lower body: {{ ability.resistance['lowerBody'] }}</li>
           </ul>
         </td>
       </tr>
     </tbody>
   </table>
-{% endblock %}
+</div>
+
+<div id="equipment">
+  <div>
+    <h3 class="text-center p-2 bg-dark text-white rounded rounded-3">Equipment</h3>
+    <h4 class="text-center p-2">Weapon</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" width="100"></th>
+          <th scope="col">Name</th>
+          <th scope="col" width="60">Max. damage</th>
+          <th scope="col" width="60">Min. damage</th>
+          <th scope="col" width="60">Critical</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set weapon = gladiator.equipment.weapon %}
+        <tr class="align-middle">
+          <td>
+            <img class="img-fluid me-2"
+              src="{{ url_for('static', filename='img/equipment/{}.svg'.format(weapon.name)) }}"
+              alt="{{ weapon.name }}">
+          </td>
+          <td>
+            {{ weapon.name.replace('-', ' ').capitalize() }}
+          </td>
+          <td>{{ weapon.damage['minimum'] }}</td>
+          <td>{{ weapon.damage['maximum'] }}</td>
+          <td>{{ weapon.damage['criticalPercentage'] }}%</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 class="text-center p-2">Armor</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" width="100"></th>
+          <th scope="col">Name</th>
+          <th scope="col" width="60">Head</th>
+          <th scope="col" width="60">Upper body</th>
+          <th scope="col" width="60">Lower body</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for component in gladiator.equipment.armour %}
+        <tr class="align-middle">
+          <td>
+            <img class="img-fluid me-2"
+              src="{{ url_for('static', filename='img/equipment/{}.svg'.format(component.name)) }}"
+              alt="{{ component.name }}">
+          </td>
+          <td>
+            {{ component.name.replace('-', ' ').capitalize() }}
+          </td>
+          <td>{{ component.resistance['head'] }}</td>
+          <td>{{ component.resistance['upperBody'] }}</td>
+          <td>{{ component.resistance['lowerBody'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock %}
+</div>
