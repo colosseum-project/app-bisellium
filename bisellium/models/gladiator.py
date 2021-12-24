@@ -13,7 +13,9 @@ class Gladiator:
         "id",
         "name",
         "type",
-        "ability",
+        "hit_point",
+        "attack",
+        "defense",
         "equipment",
         "__pagan_filename",
     )
@@ -23,13 +25,17 @@ class Gladiator:
         id: int,
         name: str,
         type: str,
-        ability: object = None,
+        hit_point: int = None,
+        attack: object = None,
+        defense: object = None,
         equipment: object = None,
     ):
         self.id = id
         self.name = name.capitalize()
         self.type = type.capitalize()
-        self.ability = ability
+        self.hit_point = hit_point
+        self.attack = attack
+        self.defense = defense
         self.equipment = equipment
         self.__pagan_filename = f"{name.lower()}.png"
         if not os.path.exists(self.__get_pagan_os_path()):
@@ -39,7 +45,7 @@ class Gladiator:
         img = pagan.Avatar(self.name, pagan.SHA512)
         img.save(self.__get_pagan_folder_os_path(), self.__pagan_filename)
 
-    def __get_pagan_folder_os_path(self):
+    def __get_pagan_folder_os_path(self) -> str:
         return safe_join(current_app.static_folder, PAGAN_FOLDER_STATIC_PATH)
 
     def __get_pagan_os_path(self) -> str:

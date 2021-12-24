@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Glossary
+{% endblock %}
+
+{% block content %}
+<h1>API status</h1>
+<ul class="list-group">
+  {% for service in api_services %}
+  {% if service.status.ishealthy %}
+  <li class="list-group-item">{{ service.name }} <span class="badge bg-success">up</span></li>
+  {% else %}
+  <li class="list-group-item">{{ service.name }} <span class="badge bg-danger">down</span>
+    <div class="alert alert-danger" role="danger">
+      {{ service.status.error_message }}
+    </div>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endblock %}

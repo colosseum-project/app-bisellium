@@ -1,21 +1,24 @@
+Dockerfile
+
 .git
 .gitignore
 .gitpod.yml
 
-# same content as .gitignore
+.env
 .venv/
 venv/
 *.pyc
-__pycache__/
-instance/
+**/__pycache__/
 .cache/
-.pytest_cache/
-.coverage
-htmlcov/
 dist/
 build/
 *.egg-info/
-.idea/
-*.swp
-*~
-pagan/
+
+instance/
+**/static/img/pagan
+.metrics
+
+requirements-dev.txt
+README.md
+CONTRIBUTING.md
+THANKS.md

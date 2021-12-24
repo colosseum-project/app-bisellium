@@ -5,20 +5,25 @@ Gladiatores
 {% endblock %}
 
 {% block content %}
-
-<p>Gladiator #{{ gladiator.id }}</p>
-
-<div id="identity" class="text-center">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-text me-5">Gladiator #{{ gladiator['id'] }}</span>
+    <div class="collapse navbar-collapse">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#attributes">Attributes</a>
+        <a class="nav-item nav-link" href="#equipment">Equipment</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="text-center">
   <img class="img-fluid rounded-start" src="{{ url_for('static', filename=gladiator.get_pagan_static_path()) }}"
-    alt="{{ gladiator.name }}">
-  <h1 class="text-dark">{{ gladiator.name }}</h1>
-  <h2 class="text-muted">{{ gladiator.type }}</h2>
+    alt="{{ gladiator['name'] }}">
+  <h1 class="text-dark">{{ gladiator['name'] }}</h1>
+  <h2 class="text-muted">{{ gladiator['type'] }}</h2>
 </div>
-
-<div id="ability">
-  <h3 class="text-center p-2 bg-dark text-white rounded rounded-3">Ability</h3>
-
-
+<div id="attributes">
+  <h3 class="text-center p-2 bg-dark text-white rounded rounded-3">Attributes</h3>
   <table class="table">
     <thead>
       <tr>
@@ -28,53 +33,99 @@ Gladiatores
       </tr>
     </thead>
     <tbody>
-      {% set ability = gladiator.ability %}
       <tr class="align-middle">
-        <td>
-          <img class="img-fluid me-2" src="{{ url_for('static', filename='img/ability/health.svg') }}" alt="health">
+        <td><img class="img-fluid me-2" src="{{ url_for('static', filename='img/attributes/health.svg') }}"
+            alt="health">
         </td>
-        <td>
-          Health
+        <td>Health</td>
+        <td>{{ gladiator["hit_point"] }} HP</td>
+      </tr>
+      <tr class="align-middle">
+        <td><img class="img-fluid me-2" src="{{ url_for('static', filename='img/attributes/attack.svg') }}"
+            alt="attack">
         </td>
+        <td>Attack</td>
         <td>
-          {{ ability.health }} HP
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col" width="150">Damage</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Deal</td>
+                <td>
+                  <b>{{ gladiator['attack']['damage']['minimum'] }}-{{ gladiator['attack']['damage']['maximum'] }}
+                    damage</b>
+                  per hit
+                </td>
+              </tr>
+              <tr>
+                <td>Critical hit</td>
+                <td><b>{{ gladiator['attack']['criticalHit']['chancePercentage'] }}% of chance</b>
+                  to deal <b>{{ gladiator['attack']['criticalHit']['multiplier'] }} time(s)</b> the damage</td>
+              </tr>
+            </tbody>
+          </table>
         </td>
       </tr>
       <tr class="align-middle">
+        <td><img class="img-fluid me-2" src="{{ url_for('static', filename='img/attributes/defense.svg') }}"
+            alt="defense"></td>
+        <td>Defense</td>
         <td>
-          <img class="img-fluid me-2" src="{{ url_for('static', filename='img/ability/attack.svg') }}" alt="attack">
-        </td>
-        <td>
-          Attack
-        </td>
-        <td>
-          Damage:
-          <ul>
-            <li>{{ ability.damage['minimum'] }}-{{ ability.damage['maximum'] }} damage</li>
-            <li>{{ ability.damage['criticalPercentage'] }}% critical</li>
-          </ul>
-        </td>
-      </tr>
-      <tr class="align-middle">
-        <td>
-          <img class="img-fluid me-2" src="{{ url_for('static', filename='img/ability/defense.svg') }}" alt="defense">
-        </td>
-        <td>
-          Defense
-        </td>
-        <td>
-          Resistance:
-          <ul>
-            <li>Head: {{ ability.resistance['head'] }}</li>
-            <li>Upper body: {{ ability.resistance['upperBody'] }}</li>
-            <li>Lower body: {{ ability.resistance['lowerBody'] }}</li>
-          </ul>
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col" width="150">Resistance</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Head</td>
+                <td><b>{{ gladiator['defense']['resistance']['headReductionPercentage'] }}% reduction</b>
+                  of damage</td>
+              </tr>
+              <tr>
+                <td>Upper body</td>
+                <td><b>{{ gladiator['defense']['resistance']['upperBodyReductionPercentage'] }}% reduction</b>
+                  of damage</td>
+              </tr>
+              <tr>
+                <td>Lower Body</td>
+                <td><b>{{ gladiator['defense']['resistance']['lowerBodyReductionPercentage'] }}% reduction</b>
+                  of damage</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col" width="150">Other</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Evasion</td>
+                <td><b>{{ gladiator['defense']['evasionChancePercentage'] }}% chance</b>
+                  to dodge an attack (100% reduction)</td>
+              </tr>
+              <tr>
+                <td>Parade</td>
+                <td><b>{{ gladiator['defense']['paradeChancePercentage'] }}% chance</b>
+                  to block an attack (60% reduction)</td>
+              </tr>
+            </tbody>
+          </table>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
-
 <div id="equipment">
   <div>
     <h3 class="text-center p-2 bg-dark text-white rounded rounded-3">Equipment</h3>
@@ -84,9 +135,9 @@ Gladiatores
         <tr>
           <th scope="col" width="100"></th>
           <th scope="col">Name</th>
-          <th scope="col" width="60">Max. damage</th>
-          <th scope="col" width="60">Min. damage</th>
-          <th scope="col" width="60">Critical</th>
+          <th scope="col">Type</th>
+          <th scope="col">Damage</th>
+          <th scope="col">Critical</th>
         </tr>
       </thead>
       <tbody>
@@ -95,14 +146,13 @@ Gladiatores
           <td>
             <img class="img-fluid me-2"
               src="{{ url_for('static', filename='img/equipment/{}.svg'.format(weapon.name)) }}"
-              alt="{{ weapon.name }}">
+              alt="{{ weapon['name'] }}">
           </td>
-          <td>
-            {{ weapon.name.replace('-', ' ').capitalize() }}
-          </td>
-          <td>{{ weapon.damage['minimum'] }}</td>
-          <td>{{ weapon.damage['maximum'] }}</td>
-          <td>{{ weapon.damage['criticalPercentage'] }}%</td>
+          <td>{{ weapon['name'].replace('-', ' ').capitalize() }}</td>
+          <td>{{ weapon['type'].replace('-', ' ').capitalize() }}</td>
+          <td>{{ weapon['damage']['minimum'] }}-{{ weapon['damage']['maximum'] }} per hit</td>
+          <td>{{ weapon['criticalHit']['chancePercentage'] }}% chance to
+            {{ weapon['criticalHit']['multiplier'] }}x </td>
         </tr>
       </tbody>
     </table>
@@ -112,25 +162,28 @@ Gladiatores
         <tr>
           <th scope="col" width="100"></th>
           <th scope="col">Name</th>
-          <th scope="col" width="60">Head</th>
-          <th scope="col" width="60">Upper body</th>
-          <th scope="col" width="60">Lower body</th>
+          <th scope="col">Type</th>
+          <th scope="col">Head</th>
+          <th scope="col">Upper</th>
+          <th scope="col">Lower</th>
+          <th scope="col">Parade</th>
+          <th scope="col">Evasion</th>
         </tr>
       </thead>
       <tbody>
         {% for component in gladiator.equipment.armour %}
         <tr class="align-middle">
-          <td>
-            <img class="img-fluid me-2"
+          <td><img class="img-fluid me-2"
               src="{{ url_for('static', filename='img/equipment/{}.svg'.format(component.name)) }}"
-              alt="{{ component.name }}">
+              alt="{{ component['name'] }}">
           </td>
-          <td>
-            {{ component.name.replace('-', ' ').capitalize() }}
-          </td>
-          <td>{{ component.resistance['head'] }}</td>
-          <td>{{ component.resistance['upperBody'] }}</td>
-          <td>{{ component.resistance['lowerBody'] }}</td>
+          <td>{{ component['name'].replace('-', ' ').capitalize() }}</td>
+          <td>{{ component['type'].replace('-', ' ').capitalize() }}</td>
+          <td>+{{ component['resistance']['headReductionPercentage'] }}%</td>
+          <td>+{{ component['resistance']['upperBodyReductionPercentage'] }}%</td>
+          <td>+{{ component['resistance']['lowerBodyReductionPercentage'] }}%</td>
+          <td>+{{ component['paradeChancePercentage'] }}%</td>
+          <td>-{{ component['evasionPenaltyPercentage'] }}%</td>
         </tr>
         {% endfor %}
       </tbody>
