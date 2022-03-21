@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Acta Diurna
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="mb-2">Duels</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Duel #</th>
+        <th scope="col">Datetime</th>
+        <th scope="col">Gladiator #1</th>
+        <th scope="col">Gladiator #2</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for result in duel_results %}
+      <tr>
+        <th scope="row">{{ result.id }}</th>
+        <td class="font-weight-light">{{ result.datestr() }} - {{ result.timestr() }}</td>
+        <td>
+          {% if result.first_gladiator["name"] == result.winner["name"] %}
+          <a class="btn btn-sm btn-outline-success"
+            href="{{ url_for('gladiatores.one_gladiator', id=result.first_gladiator.id) }}">
+            🏆 {{ result.first_gladiator["name"] }}
+          </a>
+          {% else %}
+          <a class="btn btn-sm btn-outline-danger"
+            href="{{ url_for('gladiatores.one_gladiator', id=result.first_gladiator.id) }}">
+            {{ result.first_gladiator["name"] }}
+          </a>
+          {% endif %}
+        </td>
+        <td>
+          {% if result.second_gladiator["name"] == result.winner["name"] %}
+          <a class="btn btn-sm btn-outline-success"
+            href="{{ url_for('gladiatores.one_gladiator', id=result.second_gladiator.id) }}">
+            🏆 {{ result.second_gladiator["name"] }}
+          </a>
+          {% else %}
+          <a class="btn btn-sm btn-outline-danger"
+            href="{{ url_for('gladiatores.one_gladiator', id=result.second_gladiator.id) }}">
+            {{ result.second_gladiator["name"] }}
+          </a>
+          {% endif %}
+        </td>
+        <td class="text-end">
+          <a class="btn btn-sm btn-outline-secondary"
+            href="{{ url_for('actadiurna.one_duel_result', id=result.id) }}" role="button">
+            Details
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

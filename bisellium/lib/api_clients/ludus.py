@@ -5,6 +5,7 @@ from flask import current_app
 from typing import Tuple
 
 from bisellium.models.gladiator import Gladiator
+from bisellium.models.duel_results import DuelResult
 from bisellium.lib.api_clients.base import BaseAPI
 
 
@@ -33,4 +34,29 @@ class LudusAPI(BaseAPI):
             attack=r["attack"],
             defense=r["defense"],
             equipment=r["equipment"],
+        )
+
+    def get_all_duel_results(self) -> Tuple[DuelResult]:
+        """Get all duel results."""
+        return (
+            DuelResult(
+                id=r["id"],
+                timestamp=r["timestamp"],
+                first_gladiator=r["firstGladiator"],
+                second_gladiator=r["secondGladiator"],
+                winner=r["winner"],
+            )
+            for r in self.get("/duels/results").json()
+        )
+
+    def get_one_duel_result(self, id: int) -> DuelResult:
+        """Get a duel result."""
+        r = self.get(f"/duels/results/{id}").json()
+        return DuelResult(
+            id=r["id"],
+            timestamp=r["timestamp"],
+            first_gladiator=r["firstGladiator"],
+            second_gladiator=r["secondGladiator"],
+            winner=r["winner"],
+            combat_logs=r["combatLogs"],
         )

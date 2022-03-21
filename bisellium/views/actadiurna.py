@@ -7,7 +7,7 @@ from werkzeug.exceptions import abort
 from bisellium.lib.api_clients.ludus import LudusAPI
 from bisellium.lib.api_clients.exceptions import APIEndpointException
 
-bp = Blueprint("gladiatores", __name__)
+bp = Blueprint("actadiurna", __name__)
 
 
 def api_call(func):
@@ -22,21 +22,21 @@ def api_call(func):
     return wrapper_func
 
 
-@bp.route("/gladiatores")
+@bp.route("/actadiurna")
 @api_call
-def all_gladiators():
-    """Serve all-gladiators template."""
+def all_results():
+    """Serve all-results template."""
     return render_template(
-        "gladiatores/all-gladiators.html",
-        gladiators=LudusAPI().get_all_gladiators(),
+        "actadiurna/all-results.html",
+        duel_results=LudusAPI().get_all_duel_results(),
     )
 
 
-@bp.route("/gladiatores/<id>")
+@bp.route("/actadiurna/duels/<id>")
 @api_call
-def one_gladiator(id):
-    """Serve one-gladiator template."""
+def one_duel_result(id):
+    """Serve one-duel-result template."""
     return render_template(
-        "gladiatores/one-gladiator.html",
-        gladiator=LudusAPI().get_one_gladiator(id),
+        "actadiurna/one-duel-result.html",
+        duel_result=LudusAPI().get_one_duel_result(id),
     )

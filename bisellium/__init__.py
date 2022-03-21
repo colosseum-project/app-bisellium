@@ -15,11 +15,19 @@ def create_app():
     init_extensions(app)
 
     # register views
-    from bisellium.views import healtcheck, errors, home, gladiatores, misc
+    from bisellium.views import (
+        healtcheck,
+        errors,
+        home,
+        actadiurna,
+        gladiatores,
+        misc,
+    )
 
     app.register_blueprint(errors.bp)
     app.register_blueprint(healtcheck.bp)
     app.register_blueprint(home.bp)
+    app.register_blueprint(actadiurna.bp)
     app.register_blueprint(gladiatores.bp)
     app.register_blueprint(misc.bp)
 

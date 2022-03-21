@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title -%}
+Acta Diurna
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Duel #{{ duel_result["id"] }}</h1>
+  <p>{{ duel_result.datestr() }} - {{ duel_result.timestr() }}</p>
+  <h2 class="text-center">The winner is <b>{{ duel_result.winner["name"] }}</b></h2>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
+    <div class="col">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-6 text-center">
+            <img class="img-fluid rounded-start"
+              src="{{ url_for('static', filename=duel_result.first_gladiator.get_pagan_static_path()) }}" alt="{{ duel_result.first_gladiator.name }}">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title">{{ duel_result.first_gladiator['name'] }}</h5>
+              <p class="card-text"><small class="text-muted">{{ duel_result.first_gladiator['type'] }}</small></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <a class="btn btn-sm btn-outline-secondary"
+                  href="{{ url_for('gladiatores.one_gladiator', id=duel_result.first_gladiator.id) }}" role="button">View</a>
+                <small class="text-muted">#{{ duel_result.first_gladiator['id'] }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-6 text-center">
+            <img class="img-fluid rounded-start"
+              src="{{ url_for('static', filename=duel_result.second_gladiator.get_pagan_static_path()) }}" alt="{{ duel_result.second_gladiator.name }}">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title">{{ duel_result.second_gladiator['name'] }}</h5>
+              <p class="card-text"><small class="text-muted">{{ duel_result.second_gladiator['type'] }}</small></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <a class="btn btn-sm btn-outline-secondary"
+                  href="{{ url_for('gladiatores.one_gladiator', id=duel_result.second_gladiator.id) }}" role="button">View</a>
+                <small class="text-muted">#{{ duel_result.second_gladiator['id'] }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="mt-4">Combat logs</b></h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Turn #</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in duel_result["combat_logs"] %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ log }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
