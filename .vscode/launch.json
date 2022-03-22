@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "python",
+            "name": "Debug Bisellium",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "bisellium",
+                "FLASK_ENV": "development",
+                "PROMETHEUS_MULTIPROC_DIR": "./.metrics",
+                "LUDUS_URL": "http://localhost:8080",
+            },
+            "args": [
+                "run"
+            ],
+        },
+    ]
+}
