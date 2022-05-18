@@ -36,5 +36,5 @@ RUN chown -R 1001:1001 \
 USER bisellium
 
 # run production-ready application :)
-EXPOSE 8000
-CMD [ "gunicorn", "-w 4", "-b 0.0.0.0:8000", "bisellium:create_app()"]
+EXPOSE 8080
+CMD [ "gunicorn", "-w 4", "-b 0.0.0.0:8080", "bisellium:create_app()"]

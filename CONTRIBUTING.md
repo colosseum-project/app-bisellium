@@ -31,7 +31,7 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
    export FLASK_APP=bisellium
    export FLASK_ENV=development
    export PROMETHEUS_MULTIPROC_DIR=./.metrics
-   export LUDUS_URL=http://localhost:8080
+   export LUDUS_URL=http://localhost:8081
    export DEBUG_METRICS=1 # only for debugging Prometheus metrics (WARNING: high disk usage)
    ```
 
