@@ -2,8 +2,6 @@
 
 Microservice application part of the Colosseum Project and responsible for the Web interface.
 
-**Table of content**
-
 - [Colosseum Project - Bisellium](#colosseum-project---bisellium)
   - [License](#license)
   - [Contributing](#contributing)
