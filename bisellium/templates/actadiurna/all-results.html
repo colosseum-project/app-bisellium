@@ -10,7 +10,6 @@ Acta Diurna
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Duel #</th>
         <th scope="col">Datetime</th>
         <th scope="col">Gladiator #1</th>
         <th scope="col">Gladiator #2</th>
@@ -18,9 +17,8 @@ Acta Diurna
       </tr>
     </thead>
     <tbody>
-      {% for result in duel_results %}
+      {% for result in duel_results | reverse %}
       <tr>
-        <th scope="row">{{ result.id }}</th>
         <td class="font-weight-light">{{ result.datestr() }} - {{ result.timestr() }}</td>
         <td>
           {% if result.first_gladiator["name"] == result.winner["name"] %}
