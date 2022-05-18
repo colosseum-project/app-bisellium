@@ -2,17 +2,19 @@
 
 Microservice application part of the Colosseum Project and responsible for the Web interface.
 
+**Table of content**
+
+- [Colosseum Project - Bisellium](#colosseum-project---bisellium)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Build OCI image](#build-oci-image)
+
+---
+
 ## License
 
 This application is released under the terms of the MIT license.
 See [LICENSE](LICENSE) for more information or see <https://opensource.org/licenses/MIT>.
-
----
-
-**Table of content:**
-
-- [Contributing](#contributing)
-- [Build OCI image](#build-oci-image)
 
 ## Contributing
 
