@@ -1,5 +1,5 @@
-Flask==2.2.5
-requests==2.26.0
-prometheus-flask-exporter==0.18.1
-Pillow==8.4.0
-environs==9.3.5
+Flask==3.0.0
+requests==2.31.0
+prometheus-flask-exporter==0.22.4
+Pillow==10.0.1
+environs==9.5.0
