@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.12-alpine
 ENV APP_HOME="/opt/bisellium" \
     FLASK_APP=bisellium \
     FLASK_ENV=production \
