@@ -1,7 +1,7 @@
 import os
 
 from flask import current_app
-from flask.helpers import safe_join
+from werkzeug.utils import safe_join
 
 from bisellium.lib.pagan import pagan
 
