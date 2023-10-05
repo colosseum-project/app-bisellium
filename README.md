@@ -24,5 +24,5 @@ Images can be built using Docker and the provided Dockerfile.
 To build an image, run:
 
 ```sh
-docker build -t bisellium .
+docker build -t colosseum-project/bisellium .
 ```

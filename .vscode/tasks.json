@@ -6,7 +6,7 @@
         {
             "label": "Build Docker image",
             "type": "shell",
-            "command": "docker build -t bisellium ."
+            "command": "docker build -t colosseum-project/bisellium ."
         }
     ]
 }
