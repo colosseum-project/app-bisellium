@@ -12,7 +12,7 @@ from bisellium.lib.api_clients.base import BaseAPI
 class LudusAPI(BaseAPI):
     def __init__(self):
         super().__init__(
-            base_url=current_app.config["LUDUS_URL"],
+            base_url=current_app.config["LUDUS_ENDPOINT"],
             status_path="/actuator/health",
         )
 

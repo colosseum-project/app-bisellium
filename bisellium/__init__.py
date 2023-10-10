@@ -9,7 +9,7 @@ def create_app():
 
     # apply configuration settings
     app.config.from_object("bisellium.settings")
-    app.logger.info(f'Ludus API server URL set to "{app.config["LUDUS_URL"]}"')
+    app.logger.info(f'Ludus API endpoint set to "{app.config["LUDUS_ENDPOINT"]}"')
 
     # initialize extensions
     init_extensions(app)
