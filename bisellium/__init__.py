@@ -20,6 +20,7 @@ def create_app():
         errors,
         home,
         actadiurna,
+        podium,
         gladiatores,
         misc,
     )
@@ -28,6 +29,7 @@ def create_app():
     app.register_blueprint(healtcheck.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(actadiurna.bp)
+    app.register_blueprint(podium.bp)
     app.register_blueprint(gladiatores.bp)
     app.register_blueprint(misc.bp)
 
