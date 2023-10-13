@@ -5,7 +5,58 @@ Podium - Gladiatores
 {% endblock %}
 
 {% block content %}
-<div class="alert alert-danger" role="alert">
-  ~Be patient, it is coming very soon...
+<div class="container">
+  <h1 class="mb-2">Rank</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Position</th>
+        <th scope="col">Gladiator</th>
+        <th scope="col">Type</th>
+        <th scope="col">Victories</th>
+        <th scope="col">Defeats</th>
+        <th scope="col">Ratio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in rank %}
+      <tr>
+        <td class="font-weight-light">
+          {% if loop.index == 1 %}
+          🥇
+          {% elif loop.index == 2 %}
+          🥈
+          {% elif loop.index == 3 %}
+          🥉
+          {% else %}
+          {{ loop.index }}
+          {% endif %}
+        </td>
+        <td>
+          <a class="btn btn-sm btn-outline-secondary"
+            href="{{ url_for('gladiatores.one_gladiator', id=entry.gladiator.id) }}">
+            {{ entry.gladiator["name"] }}
+          </a>
+        </td>
+        <td>
+          {{ entry.gladiator["type"].capitalize() }}
+        </td>
+        <td class="font-weight-bold">
+          {{ entry["victory_count"] }}
+        </td>
+        <td class="font-weight-bold">
+          {{ entry["defeat_count"] }}
+        </td>
+        {% if entry["ratio"] >= 1 %}
+        <td class="font-weight-bold text-success">
+        {% else %}
+        <td class="font-weight-bold text-danger">
+        {% endif %}
+          {{ entry["ratio"] | round(2) }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
