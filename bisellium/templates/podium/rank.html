@@ -22,14 +22,14 @@ Podium - Gladiatores
       {% for entry in rank %}
       <tr>
         <td class="font-weight-light">
-          {% if loop.index == 1 %}
+          {% if entry["position"] == 1 %}
           🥇
-          {% elif loop.index == 2 %}
+          {% elif entry["position"] == 2 %}
           🥈
-          {% elif loop.index == 3 %}
+          {% elif entry["position"] == 3 %}
           🥉
           {% else %}
-          {{ loop.index }}
+          {{ entry["position"] }}
           {% endif %}
         </td>
         <td>
