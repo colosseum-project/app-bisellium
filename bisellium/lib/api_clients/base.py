@@ -16,9 +16,9 @@ from bisellium.lib.api_clients.exceptions import APIEndpointException
 
 def send_request(func):
     @wraps(func)
-    def wrapper_func(*args, **kwargs):
+    def decorated_func(*args, **kwargs):
         try:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         except requests.exceptions.ConnectionError:
             raise APIEndpointException("Could not connect to the API endpoint.")
         except requests.exceptions.Timeout:
@@ -29,9 +29,10 @@ def send_request(func):
             raise APIEndpointException(
                 "Unexpected error while trying to connect to the API endpoint."
             )
-        return func(*args, **kwargs)
+        except:
+            raise APIEndpointException("Unknown error.")
 
-    return wrapper_func
+    return decorated_func
 
 
 class BaseAPI:
