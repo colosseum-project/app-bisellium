@@ -36,7 +36,7 @@ class LudusAPI(BaseAPI):
             equipment=r["equipment"],
         )
 
-    def get_all_duel_results(self) -> Tuple[DuelResult]:
+    def get_top_duel_results(self) -> Tuple[DuelResult]:
         """Get all duel results."""
         return (
             DuelResult(
@@ -46,7 +46,7 @@ class LudusAPI(BaseAPI):
                 second_gladiator=r["secondGladiator"],
                 winner=r["winner"],
             )
-            for r in self.get("/duels/results").json()
+            for r in self.get("/duels/results/top").json()
         )
 
     def get_one_duel_result(self, id: int) -> DuelResult:

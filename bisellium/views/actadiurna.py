@@ -12,7 +12,7 @@ def all_results():
     """Serve all-results template."""
     return render_template(
         "actadiurna/all-results.html",
-        duel_results=LudusAPI().get_all_duel_results(),
+        duel_results=LudusAPI().get_top_duel_results(),
     )
 
 
